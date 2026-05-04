@@ -38,13 +38,13 @@
 <p>本プライバシーポリシーは、本アプリにおけるデータの取得、利用、送信、保存、削除、ユーザーの選択について説明します。</p>
 
 <h2>2. 本アプリの基本方針</h2>
-<p>本アプリは、英語商談・会議等の理解を補助するため、ユーザーの音声を Microsoft Azure Speech に送信し、文字起こしと翻訳を行います。当社は、プライバシー保護と運用負荷の最小化のため、以下を基本方針とします。</p>
+<p>本アプリは、英語商談・会議等の理解を補助するため、ユーザーの音声を外部の音声認識・翻訳サービスに送信し、文字起こしと翻訳を行います。当社は、プライバシー保護と運用負荷の最小化のため、以下を基本方針とします。</p>
 <ul>
   <li>音声原本は初期状態では保存しません。ユーザーが「音声を端末内に保存」をオンにしたセッションだけ、端末内に保存します。</li>
-  <li>Azure Functions に音声本文、文字起こし本文、翻訳本文を保存しません。</li>
+  <li>当社のサーバーに音声本文、文字起こし本文、翻訳本文を保存しません。</li>
   <li>翻訳履歴と、許可した場合の音声ファイルはユーザーの端末内に保存します。</li>
-  <li>音声ファイルを BizCaption のクラウド、Azure Functions、Azure Table Storage、Application Insights に保存しません。</li>
-  <li>Azure Speech の audio logging / data logging を有効化しません。</li>
+  <li>音声ファイルを BizCaption のクラウドや監視ログに保存しません。</li>
+  <li>外部サービス側で任意に音声を保存する設定は有効化しません。</li>
   <li>広告SDK、第三者広告、クロスアプリトラッキングを v1 では利用しません。</li>
 </ul>
 
@@ -54,35 +54,34 @@
     <tr><th>データ</th><th>取得 / 処理内容</th><th>主な目的</th><th>保存場所</th></tr>
   </thead>
   <tbody>
-    <tr><td>マイク音声</td><td>翻訳セッション中に取得し Microsoft Azure Speech へ送信。ユーザーが音声保存をオンにした場合のみ端末内にも保存</td><td>文字起こし、翻訳、ユーザーによる復習・シャドーイング</td><td>Azure Functionsには保存しない。音声保存オン時のみ端末内</td></tr>
+    <tr><td>マイク音声</td><td>翻訳セッション中に取得し、外部の音声認識・翻訳サービスへ送信。ユーザーが音声保存をオンにした場合のみ端末内にも保存</td><td>文字起こし、翻訳、ユーザーによる復習・シャドーイング</td><td>当社サーバーには保存しない。音声保存オン時のみ端末内</td></tr>
     <tr><td>端末内音声ファイル</td><td>音声保存をオンにしたセッションの音声ファイル</td><td>履歴再生、シャドーイング練習</td><td>端末内のみ</td></tr>
-    <tr><td>文字起こし本文</td><td>Azure Speech が生成し本アプリへ返す</td><td>ライブ字幕、履歴表示</td><td>端末内</td></tr>
-    <tr><td>翻訳本文</td><td>Azure Speech が生成し本アプリへ返す</td><td>ライブ翻訳、履歴表示</td><td>端末内</td></tr>
+    <tr><td>文字起こし本文</td><td>外部サービスが生成し本アプリへ返す</td><td>ライブ字幕、履歴表示</td><td>端末内</td></tr>
+    <tr><td>翻訳本文</td><td>外部サービスが生成し本アプリへ返す</td><td>ライブ翻訳、履歴表示</td><td>端末内</td></tr>
     <tr><td>翻訳履歴</td><td>原文、翻訳、時刻、言語ペア、セッション情報</td><td>会議後の確認、復習</td><td>端末内</td></tr>
     <tr><td>言語設定・表示設定</td><td>言語ペア、字幕サイズ、テーマ等</td><td>アプリ機能</td><td>端末内</td></tr>
     <tr><td>無料利用枠</td><td>累計使用時間、使い切り状態</td><td>無料枠管理、不正利用防止</td><td>端末内 + 最小限のサーバ監査</td></tr>
-    <tr><td>StoreKit識別子</td><td>appAccountToken、originalTransactionId等</td><td>サブスクリプション認可、復元、不正利用防止</td><td>端末内 + Azure Functions監査</td></tr>
-    <tr><td>DeviceCheck token</td><td>Apple DeviceCheck token</td><td>無料枠の再利用防止</td><td>Azure Functions経由でAppleへ送信</td></tr>
-    <tr><td>技術ログ</td><td>request id、endpoint、status、latency、hashed id、usage bucket</td><td>障害調査、不正利用防止、コスト管理</td><td>Azure Functions / Application Insights</td></tr>
+    <tr><td>StoreKit識別子</td><td>appAccountToken、originalTransactionId等</td><td>サブスクリプション認可、復元、不正利用防止</td><td>端末内 + 最小限のサーバー監査</td></tr>
+    <tr><td>DeviceCheck token</td><td>Apple DeviceCheck token</td><td>無料枠の再利用防止</td><td>当社サーバー経由でAppleへ送信</td></tr>
+    <tr><td>技術ログ</td><td>request id、endpoint、status、latency、hashed id、usage bucket</td><td>障害調査、不正利用防止、コスト管理</td><td>当社サーバー / 監視基盤</td></tr>
     <tr><td>サポート問い合わせ</td><td>問い合わせ内容</td><td>サポート対応</td><td>サポート基盤</td></tr>
   </tbody>
 </table>
 
-<h2>4. Microsoft Azure Speech への送信</h2>
-<p>本アプリは、ユーザーが明示的に同意した後、翻訳セッション中のマイク音声を Microsoft Azure Speech に送信します。送信目的は文字起こしと翻訳です。</p>
-<p>利用リージョンは初期設定では Japan East を予定しています。将来リージョンを変更または追加する場合、本ポリシーを更新します。</p>
-<p>当社は、Azure Speech の audio logging / data logging を有効化しません。リアルタイムの Speech to text / Speech Translation では、Microsoft は顧客が提供したデータを保持または保存しない前提で設計します。ただし、Microsoft Azure の処理は Microsoft の契約、Product Terms、DPA、SLA、プライバシー・セキュリティ条件に従います。</p>
+<h2>4. 外部の音声認識・翻訳サービスへの送信</h2>
+<p>本アプリは、ユーザーが明示的に同意した後、翻訳セッション中のマイク音声を外部の音声認識・翻訳サービスに送信します。送信目的は文字起こしと翻訳です。</p>
+<p>当社は、外部サービス側で任意に音声を保存する設定を有効化しません。ただし、インターネット通信や外部クラウドサービスの処理は、各サービス提供者の契約条件、プライバシー・セキュリティ条件、法令に従って行われます。</p>
 
-<h2>5. Azure Functions の役割</h2>
-<p>当社は、Azure Speech の秘密鍵をアプリ内に保存しないため、Azure Functions を利用して短命の Azure Speech token を発行します。Azure Functions は以下を行います。</p>
+<h2>5. 当社サーバーの役割</h2>
+<p>当社は、外部サービスの秘密情報をアプリ内に保存しないため、当社サーバーを利用して短命の認証情報を発行します。当社サーバーは以下を行います。</p>
 <ul>
   <li>StoreKit JWS の検証</li>
   <li>DeviceCheck token の検証・中継</li>
-  <li>Azure Speech token の発行</li>
+  <li>外部サービス用の短命認証情報の発行</li>
   <li>Pro利用上限の最小監査</li>
   <li>不正利用・障害調査のための最小ログ保存</li>
 </ul>
-<p>Azure Functions は、音声ファイル、音声本文、文字起こし本文、翻訳本文、ユーザーメモ、シャドーイング進捗を保存しません。</p>
+<p>当社サーバーは、音声ファイル、音声本文、文字起こし本文、翻訳本文、ユーザーメモ、シャドーイング進捗を保存しません。</p>
 
 <h2>6. 端末内に保存するデータ</h2>
 <p>本アプリは、翻訳履歴をユーザーの端末内に保存します。履歴には、会議・商談の内容、個人情報、営業秘密、顧客情報が含まれる場合があります。</p>
@@ -98,10 +97,10 @@
   <li>ユーザーが許可した場合の端末内音声再生、シャドーイング練習機能の提供</li>
   <li>無料利用枠とPro利用上限の管理</li>
   <li>サブスクリプションの認可、復元、状態確認</li>
-  <li>Azure Speech key の秘匿と短命token発行</li>
+  <li>外部サービスの秘密情報の秘匿と短命認証情報の発行</li>
   <li>不正利用、過剰利用、障害、コスト急増の検知</li>
   <li>ユーザーサポート</li>
-  <li>法令、App Store Review、Apple / Microsoft契約への対応</li>
+  <li>法令、App Store Review、Appleその他第三者サービス契約への対応</li>
 </ul>
 
 <h2>8. 第三者サービス・サブプロセッサ</h2>
@@ -110,10 +109,8 @@
     <tr><th>第三者</th><th>用途</th></tr>
   </thead>
   <tbody>
-    <tr><td>Microsoft Azure Speech</td><td>音声の文字起こし、翻訳</td></tr>
-    <tr><td>Microsoft Azure Functions</td><td>Azure Speech token発行、認可、最小監査</td></tr>
-    <tr><td>Microsoft Azure Key Vault</td><td>Azure Speech key等の秘密情報管理</td></tr>
-    <tr><td>Microsoft Application Insights</td><td>障害・性能監視（本文ログは保存しない）</td></tr>
+    <tr><td>外部の音声認識・翻訳サービス</td><td>音声の文字起こし、翻訳</td></tr>
+    <tr><td>クラウド実行・監視基盤</td><td>短命認証情報の発行、認可、最小監査、障害・性能監視（本文ログは保存しない）</td></tr>
     <tr><td>Apple StoreKit / App Store</td><td>アプリ内課金、サブスクリプション、復元、返金管理</td></tr>
     <tr><td>Apple DeviceCheck</td><td>無料利用枠の不正利用防止</td></tr>
   </tbody>
@@ -130,10 +127,10 @@
     <tr><td>端末内の音声ファイル</td><td>ユーザーが削除するまで</td></tr>
     <tr><td>端末内の設定</td><td>ユーザーが削除またはアプリを削除するまで</td></tr>
     <tr><td>無料利用枠カウンタ</td><td>無料枠の再付与防止に必要な期間</td></tr>
-    <tr><td>Azure Functions usage / lease audit</td><td>原則30日</td></tr>
-    <tr><td>Application Insights 詳細ログ</td><td>原則30日</td></tr>
+    <tr><td>利用量 / セッション監査ログ</td><td>原則30日</td></tr>
+    <tr><td>技術監視ログ</td><td>原則30日</td></tr>
     <tr><td>Entitlement cache</td><td>サブスクリプション状態管理に必要な期間</td></tr>
-    <tr><td>音声ファイル / 音声本文 / 文字起こし本文 / 翻訳本文</td><td>Azure Functionsには保存しない</td></tr>
+    <tr><td>音声ファイル / 音声本文 / 文字起こし本文 / 翻訳本文</td><td>当社サーバーには保存しない</td></tr>
   </tbody>
 </table>
 <p>法令、紛争対応、不正利用調査、セキュリティ対応のために必要な場合、上記より長く保持することがあります。その場合でも、必要最小限の範囲に限定します。</p>
@@ -142,7 +139,7 @@
 <p>ユーザーは、以下を行うことができます。</p>
 <ul>
   <li>マイク権限をOS設定から拒否または取り消す</li>
-  <li>Azure cloud processing consent をアプリ設定から撤回する</li>
+  <li>外部クラウド処理への同意をアプリ設定から撤回する</li>
   <li>端末内音声保存をアプリ設定からオンまたはオフにする</li>
   <li>保存済み音声だけを一括削除する</li>
   <li>翻訳履歴を個別または一括削除する</li>
@@ -150,13 +147,13 @@
   <li>購入を復元する</li>
   <li>当社に問い合わせ、データに関する相談、削除依頼、訂正依頼を行う</li>
 </ul>
-<p>Azure cloud processing consent を撤回した場合、新規翻訳セッションは開始できません。ただし、端末内の履歴閲覧、履歴削除、音声削除、設定、サブスクリプション管理は引き続き利用できます。</p>
+<p>外部クラウド処理への同意を撤回した場合、新規翻訳セッションは開始できません。ただし、端末内の履歴閲覧、履歴削除、音声削除、設定、サブスクリプション管理は引き続き利用できます。</p>
 <p>端末内音声保存をオフにした場合、以後のセッションでは音声ファイルを保存しません。既に保存された音声ファイルは自動削除されないため、削除する場合はアプリ内の削除機能を利用してください。</p>
 
 <h2>11. App Store Privacy Nutrition Label との関係</h2>
 <p>App Store Connect では、実装内容に基づき、少なくとも以下を申告する予定です。</p>
 <ul>
-  <li>Audio Data: App Functionality、Trackingなし、原則ユーザーIDにリンクしない。リアルタイム翻訳のため Microsoft Azure Speech に送信し、音声保存オン時のみ端末内に保存</li>
+  <li>Audio Data: App Functionality、Trackingなし、原則ユーザーIDにリンクしない。リアルタイム翻訳のため外部の音声認識・翻訳サービスに送信し、音声保存オン時のみ端末内に保存</li>
   <li>User ID: StoreKit識別子等、App Functionality、Trackingなし</li>
   <li>Purchase History: StoreKit購入履歴、App Functionality、Trackingなし</li>
 </ul>
@@ -171,17 +168,17 @@
 <p>当社が、保護者同意なく子どもの個人情報を取得したことを認識した場合、合理的な範囲で削除等の対応を行います。</p>
 
 <h2>14. 国際的なデータ移転</h2>
-<p>本アプリでは、Microsoft Azure の利用リージョンとして初期設定では Japan East を想定しています。ただし、Microsoft、Apple、ユーザーの所在地、サポート運用、法令上の要請により、データが他の国または地域で処理される場合があります。</p>
-<p>当社は、適用される法令および Microsoft / Apple の契約条件に従い、必要な保護措置を講じます。</p>
+<p>外部クラウドサービス、Apple、ユーザーの所在地、サポート運用、法令上の要請により、データが他の国または地域で処理される場合があります。</p>
+<p>当社は、適用される法令および第三者サービスの契約条件に従い、必要な保護措置を講じます。</p>
 
 <h2>15. セキュリティ</h2>
 <p>当社は、以下のセキュリティ対策を講じます。</p>
 <ul>
-  <li>Azure Speech key をアプリ内に保存しない</li>
-  <li>Azure Functions で短命tokenを発行する</li>
+  <li>外部サービスの秘密情報をアプリ内に保存しない</li>
+  <li>当社サーバーで短命認証情報を発行する</li>
   <li>通信時はHTTPS/TLSを利用する</li>
-  <li>Azure Key Vault で秘密情報を管理する</li>
-  <li>Functionsログに音声本文、文字起こし本文、翻訳本文、Azure token、JWS全文を保存しない</li>
+  <li>秘密情報を安全な管理基盤で管理する</li>
+  <li>サーバーログに音声本文、文字起こし本文、翻訳本文、認証情報、JWS全文を保存しない</li>
   <li>端末内履歴および端末内音声ファイルにはiOS Data Protection等のOS保護を利用する</li>
 </ul>
 <p>ただし、インターネット通信、端末、クラウドサービスに完全な安全性はありません。ユーザーは、端末ロック、OS更新、端末紛失時の対策を行ってください。</p>
