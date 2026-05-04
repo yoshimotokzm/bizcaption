@@ -29,25 +29,33 @@
 </head>
 <body>
 <div class="container">
+
 <h1>BizCaption プライバシーポリシー</h1>
-<p class="meta">最終更新日: 2026-05-04 &nbsp;|&nbsp; 提供者: Kazuma Yoshimoto</p>
+<p class="meta">最終更新日: 2026-05-05 &nbsp;|&nbsp; 提供者: Kazuma Yoshimoto</p>
+
 <h2>1. はじめに</h2>
 <p>Kazuma Yoshimoto（以下「当社」）は、リアルタイム音声文字起こし・翻訳アプリ「BizCaption」（以下「本アプリ」）を提供します。</p>
 <p>本プライバシーポリシーは、本アプリにおけるデータの取得、利用、送信、保存、削除、ユーザーの選択について説明します。</p>
+
 <h2>2. 本アプリの基本方針</h2>
 <p>本アプリは、英語商談・会議等の理解を補助するため、ユーザーの音声を Microsoft Azure Speech に送信し、文字起こしと翻訳を行います。当社は、プライバシー保護と運用負荷の最小化のため、以下を基本方針とします。</p>
 <ul>
-  <li>音声原本を本アプリ内に保存しません。</li>
+  <li>音声原本は初期状態では保存しません。ユーザーが「音声を端末内に保存」をオンにしたセッションだけ、端末内に保存します。</li>
   <li>Azure Functions に音声本文、文字起こし本文、翻訳本文を保存しません。</li>
-  <li>翻訳履歴はユーザーの端末内に保存します。</li>
+  <li>翻訳履歴と、許可した場合の音声ファイルはユーザーの端末内に保存します。</li>
+  <li>音声ファイルを BizCaption のクラウド、Azure Functions、Azure Table Storage、Application Insights に保存しません。</li>
   <li>Azure Speech の audio logging / data logging を有効化しません。</li>
   <li>広告SDK、第三者広告、クロスアプリトラッキングを v1 では利用しません。</li>
 </ul>
+
 <h2>3. 取得・処理するデータ</h2>
 <table>
-  <thead><tr><th>データ</th><th>取得 / 処理内容</th><th>主な目的</th><th>保存場所</th></tr></thead>
+  <thead>
+    <tr><th>データ</th><th>取得 / 処理内容</th><th>主な目的</th><th>保存場所</th></tr>
+  </thead>
   <tbody>
-    <tr><td>マイク音声</td><td>翻訳セッション中に取得し Microsoft Azure Speech へ送信</td><td>文字起こし、翻訳</td><td>本アプリ・Azure Functionsには保存しない</td></tr>
+    <tr><td>マイク音声</td><td>翻訳セッション中に取得し Microsoft Azure Speech へ送信。ユーザーが音声保存をオンにした場合のみ端末内にも保存</td><td>文字起こし、翻訳、ユーザーによる復習・シャドーイング</td><td>Azure Functionsには保存しない。音声保存オン時のみ端末内</td></tr>
+    <tr><td>端末内音声ファイル</td><td>音声保存をオンにしたセッションの音声ファイル</td><td>履歴再生、シャドーイング練習</td><td>端末内のみ</td></tr>
     <tr><td>文字起こし本文</td><td>Azure Speech が生成し本アプリへ返す</td><td>ライブ字幕、履歴表示</td><td>端末内</td></tr>
     <tr><td>翻訳本文</td><td>Azure Speech が生成し本アプリへ返す</td><td>ライブ翻訳、履歴表示</td><td>端末内</td></tr>
     <tr><td>翻訳履歴</td><td>原文、翻訳、時刻、言語ペア、セッション情報</td><td>会議後の確認、復習</td><td>端末内</td></tr>
@@ -59,10 +67,12 @@
     <tr><td>サポート問い合わせ</td><td>問い合わせ内容</td><td>サポート対応</td><td>サポート基盤</td></tr>
   </tbody>
 </table>
+
 <h2>4. Microsoft Azure Speech への送信</h2>
 <p>本アプリは、ユーザーが明示的に同意した後、翻訳セッション中のマイク音声を Microsoft Azure Speech に送信します。送信目的は文字起こしと翻訳です。</p>
 <p>利用リージョンは初期設定では Japan East を予定しています。将来リージョンを変更または追加する場合、本ポリシーを更新します。</p>
 <p>当社は、Azure Speech の audio logging / data logging を有効化しません。リアルタイムの Speech to text / Speech Translation では、Microsoft は顧客が提供したデータを保持または保存しない前提で設計します。ただし、Microsoft Azure の処理は Microsoft の契約、Product Terms、DPA、SLA、プライバシー・セキュリティ条件に従います。</p>
+
 <h2>5. Azure Functions の役割</h2>
 <p>当社は、Azure Speech の秘密鍵をアプリ内に保存しないため、Azure Functions を利用して短命の Azure Speech token を発行します。Azure Functions は以下を行います。</p>
 <ul>
@@ -72,16 +82,20 @@
   <li>Pro利用上限の最小監査</li>
   <li>不正利用・障害調査のための最小ログ保存</li>
 </ul>
-<p>Azure Functions は、音声本文、文字起こし本文、翻訳本文、ユーザーメモ、シャドーイング進捗を保存しません。</p>
+<p>Azure Functions は、音声ファイル、音声本文、文字起こし本文、翻訳本文、ユーザーメモ、シャドーイング進捗を保存しません。</p>
+
 <h2>6. 端末内に保存するデータ</h2>
 <p>本アプリは、翻訳履歴をユーザーの端末内に保存します。履歴には、会議・商談の内容、個人情報、営業秘密、顧客情報が含まれる場合があります。</p>
-<p>ユーザーは、本アプリ内から履歴を削除できます。端末内の履歴は、ユーザーが削除するまで端末内に残ります。</p>
+<p>ユーザーが「音声を端末内に保存」をオンにした場合、該当セッションの音声ファイルも端末内に保存されます。音声ファイルは、実際の会話音声を使った復習・シャドーイングのために利用されます。当社は、音声ファイルをクラウドに保存しません。</p>
+<p>ユーザーは、本アプリ内から履歴、保存済み音声、またはその両方を削除できます。端末内の履歴および音声ファイルは、ユーザーが削除するまで端末内に残ります。</p>
 <p>当社は v1 では iCloud 同期を提供しません。将来 iCloud 同期等を提供する場合、本ポリシーを更新し、必要な同意と設定を追加します。</p>
+
 <h2>7. 利用目的</h2>
 <p>当社は、取得・処理するデータを以下の目的で利用します。</p>
 <ul>
   <li>リアルタイム文字起こし・翻訳機能の提供</li>
   <li>翻訳履歴の表示、削除、復習機能の提供</li>
+  <li>ユーザーが許可した場合の端末内音声再生、シャドーイング練習機能の提供</li>
   <li>無料利用枠とPro利用上限の管理</li>
   <li>サブスクリプションの認可、復元、状態確認</li>
   <li>Azure Speech key の秘匿と短命token発行</li>
@@ -89,9 +103,12 @@
   <li>ユーザーサポート</li>
   <li>法令、App Store Review、Apple / Microsoft契約への対応</li>
 </ul>
+
 <h2>8. 第三者サービス・サブプロセッサ</h2>
 <table>
-  <thead><tr><th>第三者</th><th>用途</th></tr></thead>
+  <thead>
+    <tr><th>第三者</th><th>用途</th></tr>
+  </thead>
   <tbody>
     <tr><td>Microsoft Azure Speech</td><td>音声の文字起こし、翻訳</td></tr>
     <tr><td>Microsoft Azure Functions</td><td>Azure Speech token発行、認可、最小監査</td></tr>
@@ -102,48 +119,61 @@
   </tbody>
 </table>
 <p>当社は、広告目的の第三者SDK、データブローカー、クロスアプリトラッキングを v1 では利用しません。</p>
+
 <h2>9. データ保持期間</h2>
 <table>
-  <thead><tr><th>データ</th><th>保持期間</th></tr></thead>
+  <thead>
+    <tr><th>データ</th><th>保持期間</th></tr>
+  </thead>
   <tbody>
     <tr><td>端末内の翻訳履歴</td><td>ユーザーが削除するまで</td></tr>
+    <tr><td>端末内の音声ファイル</td><td>ユーザーが削除するまで</td></tr>
     <tr><td>端末内の設定</td><td>ユーザーが削除またはアプリを削除するまで</td></tr>
     <tr><td>無料利用枠カウンタ</td><td>無料枠の再付与防止に必要な期間</td></tr>
     <tr><td>Azure Functions usage / lease audit</td><td>原則30日</td></tr>
     <tr><td>Application Insights 詳細ログ</td><td>原則30日</td></tr>
     <tr><td>Entitlement cache</td><td>サブスクリプション状態管理に必要な期間</td></tr>
-    <tr><td>音声本文 / 文字起こし本文 / 翻訳本文</td><td>Azure Functionsには保存しない</td></tr>
+    <tr><td>音声ファイル / 音声本文 / 文字起こし本文 / 翻訳本文</td><td>Azure Functionsには保存しない</td></tr>
   </tbody>
 </table>
 <p>法令、紛争対応、不正利用調査、セキュリティ対応のために必要な場合、上記より長く保持することがあります。その場合でも、必要最小限の範囲に限定します。</p>
+
 <h2>10. ユーザーの選択と権利</h2>
 <p>ユーザーは、以下を行うことができます。</p>
 <ul>
   <li>マイク権限をOS設定から拒否または取り消す</li>
   <li>Azure cloud processing consent をアプリ設定から撤回する</li>
+  <li>端末内音声保存をアプリ設定からオンまたはオフにする</li>
+  <li>保存済み音声だけを一括削除する</li>
   <li>翻訳履歴を個別または一括削除する</li>
   <li>サブスクリプションを App Store のアカウント設定から管理・解約する</li>
   <li>購入を復元する</li>
   <li>当社に問い合わせ、データに関する相談、削除依頼、訂正依頼を行う</li>
 </ul>
-<p>Azure cloud processing consent を撤回した場合、新規翻訳セッションは開始できません。ただし、端末内の履歴閲覧、履歴削除、設定、サブスクリプション管理は引き続き利用できます。</p>
+<p>Azure cloud processing consent を撤回した場合、新規翻訳セッションは開始できません。ただし、端末内の履歴閲覧、履歴削除、音声削除、設定、サブスクリプション管理は引き続き利用できます。</p>
+<p>端末内音声保存をオフにした場合、以後のセッションでは音声ファイルを保存しません。既に保存された音声ファイルは自動削除されないため、削除する場合はアプリ内の削除機能を利用してください。</p>
+
 <h2>11. App Store Privacy Nutrition Label との関係</h2>
 <p>App Store Connect では、実装内容に基づき、少なくとも以下を申告する予定です。</p>
 <ul>
-  <li>Audio Data: App Functionality、Trackingなし、原則ユーザーIDにリンクしない</li>
+  <li>Audio Data: App Functionality、Trackingなし、原則ユーザーIDにリンクしない。リアルタイム翻訳のため Microsoft Azure Speech に送信し、音声保存オン時のみ端末内に保存</li>
   <li>User ID: StoreKit識別子等、App Functionality、Trackingなし</li>
   <li>Purchase History: StoreKit購入履歴、App Functionality、Trackingなし</li>
 </ul>
 <p>実装変更により収集データが変わる場合、App Store Privacy Nutrition Label と本ポリシーを更新します。</p>
+
 <h2>12. App Tracking Transparency</h2>
 <p>本アプリは v1 では広告目的のトラッキングを行いません。第三者広告SDK、データブローカー共有、クロスアプリ・クロスサイトのユーザー追跡を行いません。</p>
 <p>そのため、v1 では App Tracking Transparency の許可ダイアログを表示しません。将来、トラッキングに該当する機能を導入する場合、事前に本ポリシーを更新し、必要な同意を取得します。</p>
+
 <h2>13. 子どものプライバシー</h2>
 <p>本アプリは、13歳未満の子どもを対象としていません。EEA等、より高い年齢基準が適用される地域では、その基準に従います。</p>
 <p>当社が、保護者同意なく子どもの個人情報を取得したことを認識した場合、合理的な範囲で削除等の対応を行います。</p>
+
 <h2>14. 国際的なデータ移転</h2>
 <p>本アプリでは、Microsoft Azure の利用リージョンとして初期設定では Japan East を想定しています。ただし、Microsoft、Apple、ユーザーの所在地、サポート運用、法令上の要請により、データが他の国または地域で処理される場合があります。</p>
 <p>当社は、適用される法令および Microsoft / Apple の契約条件に従い、必要な保護措置を講じます。</p>
+
 <h2>15. セキュリティ</h2>
 <p>当社は、以下のセキュリティ対策を講じます。</p>
 <ul>
@@ -152,17 +182,21 @@
   <li>通信時はHTTPS/TLSを利用する</li>
   <li>Azure Key Vault で秘密情報を管理する</li>
   <li>Functionsログに音声本文、文字起こし本文、翻訳本文、Azure token、JWS全文を保存しない</li>
-  <li>端末内履歴にはiOS Data Protection等のOS保護を利用する</li>
+  <li>端末内履歴および端末内音声ファイルにはiOS Data Protection等のOS保護を利用する</li>
 </ul>
 <p>ただし、インターネット通信、端末、クラウドサービスに完全な安全性はありません。ユーザーは、端末ロック、OS更新、端末紛失時の対策を行ってください。</p>
+
 <h2>16. 変更</h2>
 <p>当社は、必要に応じて本ポリシーを変更することがあります。重要な変更を行う場合、本アプリ内、Webサイト、App Store の更新情報その他適切な方法で通知します。</p>
+
 <h2>17. 問い合わせ</h2>
 <p>本ポリシーまたはデータの取扱いに関する問い合わせは、<a href="support.html">サポートページ</a>よりご連絡ください。</p>
+
 <div class="nav">
   <a href="terms.html">利用規約</a>
   <a href="support.html">サポート</a>
 </div>
+
 </div>
 </body>
-                                               </html>
+</html>
