@@ -33,10 +33,10 @@
 <div class="container">
 
 <h1>BizCaption プライバシーポリシー</h1>
-<p class="meta">最終更新日: 2026-05-10 &nbsp;|&nbsp; 提供者: Kazuma Yoshimoto</p>
+<p class="meta">最終更新日: 2026-05-11 &nbsp;|&nbsp; 提供者: Kazuma Yoshimoto</p>
 
 <div class="notice">
-  <p><strong>重要:</strong> BizCaption は、リアルタイム翻訳、文字起こし、翻訳音声生成のため、ユーザーのマイク音声または会議音声を、Kazuma Yoshimoto が管理する Edge Broker / Media Relay を経由して <strong>Microsoft Azure OpenAI Realtime Translation</strong> に送信します。送信前にアプリ内でこの内容を表示し、ユーザーの明示的な同意を取得します。</p>
+  <p><strong>重要:</strong> BizCaption は、リアルタイム文字起こし、字幕表示、翻訳のため、翻訳セッション中のマイク音声と、音声から生成される文字起こしテキストを <strong>Microsoft Azure AI Speech / Microsoft Translator（Microsoft Corporation）</strong> に送信します。送信前にアプリ内で、送信されるデータ、送信先、利用目的を表示し、ユーザーの明示的な同意を取得します。</p>
 </div>
 
 <h2>1. はじめに</h2>
@@ -45,9 +45,9 @@
 
 <h2>2. 本アプリの基本方針</h2>
 <ul>
-  <li>翻訳処理には Microsoft Azure OpenAI Realtime Translation を利用します。</li>
-  <li>当社の Edge Broker / Media Relay は、Azure OpenAI API キーをアプリ内に保存しないための中継基盤です。</li>
-  <li>当社サーバーは、音声本文、文字起こし本文、翻訳本文、翻訳音声本文を永続保存しません。</li>
+  <li>翻訳処理には Microsoft Azure AI Speech / Microsoft Translator（Microsoft Corporation）を利用します。</li>
+  <li>当社サーバーは、Microsoft Azure AI Speech の秘密情報をアプリ内に保存しないため、短命の認証情報を発行します。</li>
+  <li>当社サーバーは、音声本文、文字起こし本文、翻訳本文を永続保存しません。</li>
   <li>翻訳履歴と、ユーザーが有効にした場合のローカル音声ファイルは、ユーザーの端末内に保存されます。</li>
   <li>広告SDK、第三者広告、データブローカー共有、クロスアプリトラッキングは利用しません。</li>
   <li>収集・送信するデータは、本アプリの翻訳、利用量管理、購入確認、不正利用防止、障害対応に必要な範囲に限定します。</li>
@@ -59,12 +59,11 @@
     <tr><th>データ</th><th>取得 / 処理内容</th><th>主な目的</th><th>保存場所</th></tr>
   </thead>
   <tbody>
-    <tr><td>マイク音声</td><td>ユーザーが翻訳を開始したときに取得し、翻訳処理のため送信</td><td>文字起こし、翻訳、翻訳音声生成</td><td>当社サーバーには永続保存しない</td></tr>
-    <tr><td>会議音声</td><td>ユーザーが会議モードで選択した入力デバイスから取得し、翻訳処理のため送信</td><td>リモート参加者音声の翻訳、ローカル再生、字幕表示</td><td>当社サーバーには永続保存しない</td></tr>
-    <tr><td>翻訳結果テキスト</td><td>Microsoft Azure OpenAI Realtime Translation から返される文字起こし・翻訳テキスト</td><td>ライブ字幕、履歴表示、復習</td><td>端末内。ユーザーが削除可能</td></tr>
-    <tr><td>翻訳音声</td><td>Microsoft Azure OpenAI Realtime Translation から返される翻訳先言語の音声</td><td>ローカル再生、仮想マイク出力、会議補助</td><td>当社サーバーには永続保存しない。ローカル音声保存を有効にした場合のみ端末内保存</td></tr>
+    <tr><td>マイク音声</td><td>翻訳セッション中に取得し、Microsoft Azure AI Speech / Microsoft Translator（Microsoft Corporation）へ送信</td><td>リアルタイム文字起こし、字幕表示、翻訳</td><td>当社サーバーには保存しない。端末内音声保存をオンにしたセッションだけ端末内に保存</td></tr>
+    <tr><td>文字起こし本文</td><td>Microsoft Azure AI Speech が生成し本アプリへ返す。音声翻訳では生成された文字起こしテキストが Microsoft Translator に送信される場合があります</td><td>ライブ字幕、履歴表示、翻訳</td><td>端末内。ユーザーが削除可能</td></tr>
+    <tr><td>翻訳本文</td><td>Microsoft Translator / Azure Speech Translation が生成し本アプリへ返す</td><td>ライブ翻訳、履歴表示、復習</td><td>端末内。ユーザーが削除可能</td></tr>
     <tr><td>端末内音声ファイル</td><td>ユーザーがローカル音声保存を有効にしたセッションのみ端末内に保存</td><td>履歴再生、シャドーイング、復習</td><td>端末内。ユーザーが削除可能</td></tr>
-    <tr><td>言語設定・会議ルート設定</td><td>翻訳元/翻訳先言語、表示言語、会議用入出力デバイス設定</td><td>アプリ機能、会議モードの再利用</td><td>端末内</td></tr>
+    <tr><td>言語設定・表示設定</td><td>翻訳元/翻訳先言語、表示言語、字幕サイズ、テーマ等</td><td>アプリ機能</td><td>端末内</td></tr>
     <tr><td>利用量・セッション情報</td><td>利用時間、予約枠、セッションID、方向、利用枠の消費量</td><td>無料枠、有料プラン、追加パックの利用量管理</td><td>端末内 + 当社サーバーの最小限の利用量管理ストア</td></tr>
     <tr><td>購入状態・StoreKit情報</td><td>App Store の取引検証情報、サブスクリプション状態、追加パック状態</td><td>購入確認、復元、利用枠付与、不正利用防止</td><td>端末内 + 当社サーバーの最小限の検証記録</td></tr>
     <tr><td>DeviceCheck / 匿名化端末識別情報</td><td>Apple DeviceCheck token、端末ごとの無料枠管理用ハッシュ</td><td>無料利用枠の再利用防止、不正利用防止</td><td>当社サーバー、Apple DeviceCheck</td></tr>
@@ -74,10 +73,10 @@
 </table>
 
 <h2>4. 第三者 AI サービスへの送信</h2>
-<p>本アプリは、ユーザーがアプリ内で同意した後、リアルタイム翻訳、文字起こし、翻訳音声生成のため、マイク音声または会議音声を <strong>Microsoft Azure OpenAI Realtime Translation</strong> に送信します。</p>
-<p>送信は、当社が管理する Edge Broker と Media Relay を経由します。これにより、Azure OpenAI API キーをアプリ内に保存せず、短命のセッション情報で通信します。</p>
-<p>送信される可能性がある情報は、音声チャンク、翻訳元/翻訳先言語、セッションID、翻訳方向、通信に必要な技術メタデータです。氏名、メールアドレス、連絡先、位置情報、広告識別子は、翻訳処理のためには送信しません。</p>
-<p>当社は、音声、文字起こし、翻訳、翻訳音声を広告目的で第三者に提供しません。また、当社はこれらのデータをユーザープロファイル作成やクロスアプリトラッキングに利用しません。</p>
+<p>本アプリは、ユーザーがアプリ内で明示的に同意した後、翻訳セッション中のマイク音声と、音声から生成される文字起こしテキストを <strong>Microsoft Azure AI Speech / Microsoft Translator（Microsoft Corporation）</strong> に送信します。送信目的は、リアルタイムの文字起こし、字幕表示、翻訳です。</p>
+<p>送信される可能性がある情報は、音声チャンク、音声から生成される文字起こしテキスト、翻訳元/翻訳先言語、セッションID、翻訳方向、通信に必要な技術メタデータです。氏名、メールアドレス、連絡先、位置情報、広告識別子は、翻訳処理のためには送信しません。</p>
+<p>当社は、Microsoft Azure AI Speech / Microsoft Translator 側で任意に音声を保存する設定を有効化しません。ただし、インターネット通信や外部クラウドサービスの処理は、Microsoft の契約条件、プライバシー・セキュリティ条件、法令に従って行われます。当社は、同等以上の保護を提供する第三者サービスのみを利用する方針です。</p>
+<p>当社は、音声、文字起こし、翻訳を広告目的で第三者に提供しません。また、当社はこれらのデータをユーザープロファイル作成やクロスアプリトラッキングに利用しません。</p>
 
 <h2>5. 第三者サービス・サブプロセッサ</h2>
 <table>
@@ -85,8 +84,8 @@
     <tr><th>第三者</th><th>用途</th><th>共有される主なデータ</th></tr>
   </thead>
   <tbody>
-    <tr><td>Microsoft Azure OpenAI Realtime Translation</td><td>音声の文字起こし、翻訳、翻訳音声生成</td><td>音声、言語設定、翻訳に必要なセッションメタデータ</td></tr>
-    <tr><td>Microsoft Azure</td><td>Edge Broker、Media Relay、利用量管理、Key Vault、監視基盤</td><td>短命セッション情報、利用量、技術ログ、暗号化された設定情報</td></tr>
+    <tr><td>Microsoft Azure AI Speech / Microsoft Translator（Microsoft Corporation）</td><td>翻訳セッション中のマイク音声および音声から生成される文字起こしテキストの処理、文字起こし、翻訳</td><td>マイク音声、文字起こしテキスト、言語設定、翻訳に必要なセッションメタデータ</td></tr>
+    <tr><td>Microsoft Azure Functions / Application Insights（Microsoft Corporation）</td><td>短命認証情報の発行、認可、最小監査、障害・性能監視</td><td>短命セッション情報、利用量、技術ログ。音声本文、文字起こし本文、翻訳本文は保存しない</td></tr>
     <tr><td>Apple StoreKit / App Store</td><td>アプリ内課金、サブスクリプション、追加パック、復元、返金管理</td><td>購入状態、取引検証情報</td></tr>
     <tr><td>Apple DeviceCheck</td><td>無料利用枠の不正利用防止</td><td>DeviceCheck token、検証結果</td></tr>
     <tr><td>GitHub Issues</td><td>ユーザーが任意で利用するサポート窓口</td><td>ユーザーが投稿した問い合わせ内容</td></tr>
@@ -95,13 +94,13 @@
 <p>当社は、上記の第三者が本ポリシーおよび App Store Review Guidelines で求められる保護と同等以上の保護を提供するサービス・契約条件を選定し、必要な範囲に限定してデータを共有します。</p>
 
 <h2>6. 当社サーバーの役割</h2>
-<p>当社サーバーは、翻訳用の秘密情報をアプリ内に保存しないための中継、利用枠管理、購入検証、不正利用防止を行います。</p>
+<p>当社サーバーは、外部サービスの秘密情報をアプリ内に保存しないための短命認証情報の発行、利用枠管理、購入検証、不正利用防止を行います。</p>
 <ul>
-  <li>Azure OpenAI API キーをサーバー側で管理し、アプリには含めません。</li>
-  <li>短命の relay token とセッション lease を発行します。</li>
+  <li>Microsoft Azure AI Speech 用の短命認証情報を発行します。</li>
+  <li>短命のセッション lease を発行します。</li>
   <li>StoreKit JWS と DeviceCheck token を検証します。</li>
   <li>利用量を Azure Table Storage 等で管理します。</li>
-  <li>音声本文、文字起こし本文、翻訳本文、翻訳音声本文、認証情報全文をログに保存しません。</li>
+  <li>音声本文、文字起こし本文、翻訳本文、認証情報全文をログに保存しません。</li>
 </ul>
 
 <h2>7. 端末内に保存するデータ</h2>
@@ -111,8 +110,7 @@
 
 <h2>8. 利用目的</h2>
 <ul>
-  <li>リアルタイム翻訳、文字起こし、翻訳音声生成</li>
-  <li>会議アプリと併用するための翻訳音声出力、ローカルモニター再生、字幕表示</li>
+  <li>リアルタイム文字起こし、字幕表示、翻訳</li>
   <li>翻訳履歴、保存済み音声、復習機能の提供</li>
   <li>無料利用枠、有料プラン、追加パックの利用量管理</li>
   <li>購入状態の確認、復元、不正利用防止</li>
@@ -133,14 +131,14 @@
     <tr><td>StoreKit / 購入検証記録</td><td>購入状態管理、復元、不正利用防止、返金対応に必要な期間</td></tr>
     <tr><td>DeviceCheck / 匿名化端末識別情報</td><td>無料枠の再付与防止に必要な期間</td></tr>
     <tr><td>技術ログ</td><td>原則30日。ただし法令、セキュリティ、不正利用調査、障害対応に必要な場合は必要最小限の範囲で延長</td></tr>
-    <tr><td>音声本文 / 文字起こし本文 / 翻訳本文 / 翻訳音声本文</td><td>当社サーバーには永続保存しない</td></tr>
+    <tr><td>音声本文 / 文字起こし本文 / 翻訳本文</td><td>当社サーバーには永続保存しない</td></tr>
   </tbody>
 </table>
 
 <h2>10. ユーザーの選択と権利</h2>
 <ul>
   <li>マイク権限を OS 設定から拒否または取り消すことができます。</li>
-  <li>外部クラウド処理への同意をアプリ設定から撤回できます。</li>
+  <li>Microsoft Azure AI Speech / Microsoft Translator への送信同意をアプリ設定から撤回できます。</li>
   <li>同意を撤回した場合、新規翻訳セッションは開始できません。</li>
   <li>端末内音声保存をアプリ設定からオン/オフできます。</li>
   <li>翻訳履歴、保存済み音声ファイルをアプリ内から削除できます。</li>
@@ -153,7 +151,7 @@
 <p>録音、保存、議事録化、共有を行う場合も、ユーザーの責任で必要な許可と同意を取得してください。</p>
 
 <h2>12. App Store Privacy Nutrition Label との関係</h2>
-<p>App Store Connect では、実装内容に基づき、少なくとも Audio Data、User Content、Purchases、Identifiers、Diagnostics を申告対象として扱います。Tracking は行いません。実装変更により収集データが変わる場合、App Store Privacy Nutrition Label と本ポリシーを更新します。</p>
+<p>App Store Connect では、実装内容に基づき、少なくとも Audio Data、User ID、Purchase History、Product Interaction を App Functionality、Tracking なしとして申告対象として扱います。Product Interaction は、利用時間、利用枠、セッション監査など、本アプリの利用量管理に必要な情報です。実装変更により収集データが変わる場合、App Store Privacy Nutrition Label と本ポリシーを更新します。</p>
 
 <h2>13. App Tracking Transparency</h2>
 <p>本アプリは広告目的のトラッキングを行いません。第三者広告SDK、データブローカー共有、クロスアプリ・クロスサイトのユーザー追跡を行いません。そのため、現行版では App Tracking Transparency の許可ダイアログを表示しません。</p>
@@ -166,11 +164,11 @@
 
 <h2>16. セキュリティ</h2>
 <ul>
-  <li>Azure OpenAI API キーをアプリ内に保存しません。</li>
+  <li>外部サービスの秘密情報をアプリ内に保存しません。</li>
   <li>通信時は HTTPS / WSS / TLS を利用します。</li>
   <li>短命 token、署名、期限、利用量 lease により中継セッションを制御します。</li>
-  <li>サーバーログでは、音声本文、字幕本文、翻訳本文、翻訳音声、認証情報、JWS全文を記録しないよう redaction を行います。</li>
-  <li>端末内履歴および音声ファイルには、iOS / macOS のデータ保護機能を利用します。</li>
+  <li>サーバーログでは、音声本文、字幕本文、翻訳本文、認証情報、JWS全文を記録しないよう redaction を行います。</li>
+  <li>端末内履歴および音声ファイルには、iOS / iPadOS のデータ保護機能を利用します。</li>
 </ul>
 
 <h2>17. 変更</h2>

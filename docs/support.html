@@ -30,15 +30,15 @@
 <div class="container">
 
 <h1>BizCaption サポート</h1>
-<p class="meta">最終更新日: 2026-05-10 &nbsp;|&nbsp; 提供者: Kazuma Yoshimoto</p>
+<p class="meta">最終更新日: 2026-05-11 &nbsp;|&nbsp; 提供者: Kazuma Yoshimoto</p>
 
-<p>BizCaption は、Microsoft Azure OpenAI Realtime Translation を利用したリアルタイム音声翻訳アプリです。このページでは、よくある質問と問い合わせ方法をご案内します。</p>
+<p>BizCaption は、Microsoft Azure AI Speech / Microsoft Translator（Microsoft Corporation）を利用したリアルタイム音声翻訳アプリです。このページでは、よくある質問と問い合わせ方法をご案内します。</p>
 
 <h2>よくある質問</h2>
 
 <div class="card">
   <h3>音声はどこに送信されますか？</h3>
-  <p>翻訳機能を利用すると、マイク音声または会議音声は、Kazuma Yoshimoto が管理する Edge Broker / Media Relay を経由して Microsoft Azure OpenAI Realtime Translation に送信されます。送信目的は、リアルタイム文字起こし、翻訳、翻訳音声生成です。</p>
+  <p>翻訳機能を利用すると、翻訳セッション中のマイク音声と、音声から生成される文字起こしテキストが Microsoft Azure AI Speech / Microsoft Translator（Microsoft Corporation）に送信されます。送信目的は、リアルタイム文字起こし、字幕表示、翻訳です。</p>
 </div>
 
 <div class="card">
@@ -48,17 +48,17 @@
 
 <div class="card">
   <h3>BizCaption のサーバーに音声や字幕は保存されますか？</h3>
-  <p>BizCaption のサーバーは、音声本文、文字起こし本文、翻訳本文、翻訳音声本文を永続保存しません。翻訳履歴と、ユーザーが有効にした場合のローカル音声ファイルは、ユーザーの端末内に保存されます。</p>
+  <p>BizCaption のサーバーは、音声本文、文字起こし本文、翻訳本文を永続保存しません。翻訳履歴と、ユーザーが有効にした場合のローカル音声ファイルは、ユーザーの端末内に保存されます。</p>
 </div>
 
 <div class="card">
   <h3>会議アプリで使うには何が必要ですか？</h3>
-  <p>macOS 会議モードでは、BlackHole、Loopback などの仮想オーディオデバイスを利用して、翻訳後の音声だけを Zoom、Microsoft Teams、Google Meet 等の会議アプリへ出力できます。会議前に、会議アプリ側のマイクが仮想デバイスになっていることを確認してください。</p>
+  <p>現在の審査ビルドでは、端末のマイク入力を使って字幕と翻訳テキストを表示します。Zoom、Microsoft Teams、Google Meet 等の会議アプリと併用する場合は、会議音声が端末マイクで拾える状態か事前に確認してください。</p>
 </div>
 
 <div class="card">
   <h3>リモート参加者の音声も翻訳できますか？</h3>
-  <p>macOS 会議モードでは、会議アプリの音声出力や仮想オーディオデバイスを入力として選択し、相手の音声を母国語へ翻訳してローカルで聞くことができます。OS、会議アプリ、仮想デバイスの設定に依存するため、事前の音声ルート確認をおすすめします。</p>
+  <p>端末マイクで取得できる音声であれば翻訳できます。ヘッドホン利用時など、端末マイクが会議音声を拾えない環境では認識されない場合があります。</p>
 </div>
 
 <div class="card">
